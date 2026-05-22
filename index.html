@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veer Sports Foundation | Emerald Dynasty</title>
+    <meta name="description" content="Empowering Youth Through Sports, Education & Leadership.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --emerald: #1A5C3A;
+            --emerald-deep: #0F3D26;
+            --emerald-mid: #236B45;
+            --emerald-light: #2D8055;
+            --emerald-pale: #E8F5EE;
+            --gold: #C9922A;
+            --gold-light: #E8B84B;
+            --gold-pale: #FBF3E2;
+            --ivory: #F7F3EC;
+            --ivory-warm: #EDE7D9;
+            --charcoal: #1C1C1C;
+            --charcoal-mid: #2E2E2E;
+            --charcoal-light: #3D3D3D;
+            --cream: #FAF8F4;
+            --text-dark: #1C1C1C;
+            --text-muted: #6B6560;
+            --text-light: rgba(255,255,255,0.72);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            cursor: none; /* Custom cursor */
+            background-color: var(--charcoal);
+            color: var(--text-dark);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
+        }
+
+        /* Typography Base */
+        h1, h2, h3, h4, h5, h6, .font-bebas { font-family: 'Bebas Neue', cursive; }
+        .font-cormorant { font-family: 'Cormorant Garamond', serif; }
+        .font-courier { font-family: 'Courier Prime', monospace; }
+        .font-dm { font-family: 'DM Sans', sans-serif; }
+
+        a { text-decoration: none; color: inherit; cursor: none; }
+        ul { list-style: none; }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            width: 12px; height: 12px;
+            background: var(--emerald);
+            border-radius: 50%;
+            position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+        .cursor-ring {
+            width: 28px; height: 28px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+
+        /* Textures & Backgrounds */
+        .bg-ivory { background-color: var(--ivory); }
+        .bg-ivory-warm { background-color: var(--ivory-warm); }
+        .bg-charcoal { background-color: var(--charcoal); color: var(--ivory); }
+        .bg-emerald { background-color: var(--emerald); color: var(--ivory); }
+        .bg-emerald-deep { background-color: var(--emerald-deep); color: var(--ivory); }
+
+        .tex-ivory {
+            background-image: radial-gradient(circle, rgba(26,92,58,0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .tex-charcoal {
+            background-image: repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(201,146,42,0.04) 9px);
+        }
+        .tex-emerald {
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(255,255,255,0.04) 30px);
+        }
+
+        .grain-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 999; opacity: 0.04;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            animation: noiseFlicker 4s steps(10) infinite alternate;
+        }
+
+        @keyframes noiseFlicker {
+            0% { opacity: 0.03; }
+            100% { opacity: 0.05; }
+        }
+
+        /* Layout & Utilities */
+        .container { max-width: 1440px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
+        section { padding: 120px 0; position: relative; }
+        .diagonal-slash { clip-path: polygon(0 0, 100% 0, 100% 94%, 0 100%); padding-bottom: calc(120px + 6vw); }
+        
+        .gold-rule { width: 60px; height: 1px; background-color: var(--gold); margin: 2rem 0; transform-origin: left; }
+        
+        .faded-letter {
+            font-family: 'Bebas Neue', cursive; font-size: 20rem; opacity: 0.03;
+            position: absolute; z-index: 0; pointer-events: none; line-height: 0.8;
+            color: var(--emerald);
+        }
+        .bg-charcoal .faded-letter, .bg-emerald .faded-letter, .bg-emerald-deep .faded-letter {
+            color: var(--ivory);
+        }
+
+        .vertical-label {
+            writing-mode: vertical-rl; text-transform: uppercase; letter-spacing: 3px;
+            font-family: 'Courier Prime', monospace; opacity: 0.15;
+            position: absolute; left: 2%; top: 120px; z-index: 1;
+        }
+
+        /* Reveal Animations */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .gold-rule.reveal { transform: scaleX(0); }
+        .gold-rule.reveal.active { transform: scaleX(1); }
+
+        /* Navbar */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 20px 5%; transition: all 0.4s ease; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        nav.scrolled {
+            background: rgba(247,243,236,0.97); backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--gold); padding: 15px 5%;
+        }
+        nav.scrolled.nav-dark {
+            background: rgba(28,28,28,0.97); color: var(--ivory);
+        }
+
+        .nav-logo { display: flex; align-items: center; gap: 15px; }
+        .logo-box {
+            width: 32px; height: 32px; background: var(--emerald); color: white;
+            display: flex; justify-content: center; align-items: center;
+            font-family: 'Bebas Neue'; font-size: 20px; border-radius: 2px;
+        }
+        .logo-text-inner .v-top { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 20px; line-height: 1; transition: color 0.4s; }
+        .logo-text-inner .v-sub { font-family: 'Courier Prime'; font-size: 9px; letter-spacing: 4px; color: var(--gold); }
+        
+        nav.scrolled.nav-dark .v-top { color: var(--ivory); }
+        nav.scrolled:not(.nav-dark) .v-top { color: var(--charcoal); }
+        nav:not(.scrolled) .v-top { color: var(--ivory); } /* Assuming hero is dark */
+
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-link {
+            font-family: 'DM Sans'; font-size: 13px; text-transform: uppercase;
+            letter-spacing: 2px; position: relative; transition: color 0.3s;
+            color: rgba(255,255,255,0.6); /* Default hero state */
+        }
+        nav.scrolled:not(.nav-dark) .nav-link { color: rgba(28,28,28,0.6); }
+        nav.scrolled.nav-dark .nav-link { color: rgba(255,255,255,0.6); }
+        
+        .nav-link:hover, .nav-link.active { color: var(--emerald) !important; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+            background-color: var(--emerald); transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        .btn-donate {
+            background: var(--emerald); color: white; font-family: 'Bebas Neue';
+            font-size: 16px; letter-spacing: 3px; padding: 10px 24px; border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .btn-donate:hover { background: var(--emerald-deep); }
+
+        .hamburger {
+            display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001; padding: 10px;
+        }
+        .hamburger span { display: block; width: 30px; height: 1px; background-color: var(--ivory); transition: all 0.3s; }
+        nav.scrolled:not(.nav-dark) .hamburger span { background-color: var(--charcoal); }
+
+        .mobile-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--emerald); z-index: 1000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        .mobile-menu.active { opacity: 1; pointer-events: auto; }
+        .mobile-menu .nav-link { font-size: 20px; color: var(--ivory); opacity: 0; transform: translateY(20px); transition: all 0.4s; }
+        .mobile-menu.active .nav-link { opacity: 1; transform: translateY(0); }
+        .mobile-menu .nav-link::after { display: none; }
+
+        /* Buttons */
+        .btn {
+            font-family: 'Bebas Neue'; font-size: 18px; letter-spacing: 3px; padding: 14px 32px;
+            border-radius: 2px; transition: all 0.3s; display: inline-block; cursor: none;
+        }
+        .btn-em { background: var(--emerald); color: white; border: 1px solid var(--emerald); }
+        .btn-em:hover { background: var(--emerald-deep); transform: translateY(-2px); }
+        .btn-outline-gold { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+        .btn-outline-gold:hover { background: rgba(201,146,42,0.1); transform: translateY(-2px); }
+
+        /* 2. Hero */
+        #hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .hero-bg-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .hero-bg-parallax { position: absolute; top: -20%; left: 0; width: 100%; height: 140%; will-change: transform; }
+        
+        .hero-content { text-align: center; width: 100%; max-width: 1000px; display: flex; flex-direction: column; align-items: center; }
+        .hero-tag { font-family: 'Courier Prime'; font-size: 11px; color: var(--gold); letter-spacing: 3px; margin-bottom: 2rem; }
+        
+        .hero-h1 {
+            font-family: 'Bebas Neue'; letter-spacing: -1px; line-height: 0.9;
+            margin-bottom: 2rem; display: flex; flex-direction: column; align-items: center;
+        }
+        .hero-h1 .line { display: block; overflow: hidden; }
+        .hero-h1 .line-inner { display: inline-block; transform: translateY(100%); opacity: 0; animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .hero-h1 .line1 { font-size: clamp(6rem, 16vw, 14rem); color: var(--ivory); }
+        .hero-h1 .line2 { font-size: clamp(6rem, 16vw, 14rem); color: transparent; -webkit-text-stroke: 2px var(--gold); animation-delay: 0.1s; }
+        .hero-h1 .line3 { font-size: clamp(6rem, 16vw, 14rem); color: var(--emerald); animation-delay: 0.2s; }
+        
+        @keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
+
+        .hero-sub { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 300; font-size: clamp(1.1rem, 2vw, 1.6rem); color: var(--gold-light); letter-spacing: 2px; }
+        .hero-desc { color: rgba(255,255,255,0.55); max-width: 520px; text-align: center; margin-bottom: 2rem; line-height: 1.8; }
+        .hero-btns { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 4rem; }
+        
+        .hero-stats { display: flex; gap: 2rem; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .hero-stat { text-align: center; }
+        .hero-stat-num { font-family: 'Bebas Neue'; font-size: 3rem; color: var(--gold); line-height: 1; }
+        .hero-stat-label { font-family: 'Courier Prime'; font-size: 10px; color: var(--ivory); letter-spacing: 2px; text-transform: uppercase; margin-top: 0.5rem; }
+        .stat-sep { color: rgba(255,255,255,0.2); font-size: 2rem; }
+
+        .marquee-wrapper { position: absolute; bottom: 0; left: 0; width: 100%; z-index: 10; }
+        .marquee-container { background: var(--emerald); overflow: hidden; white-space: nowrap; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .marquee-content { display: inline-block; animation: marquee 25s linear infinite; font-family: 'Courier Prime'; color: var(--gold); letter-spacing: 2px; font-size: 14px; }
+        .marquee-container:hover .marquee-content { animation-play-state: paused; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Tags & Headers */
+        .sec-tag { font-family: 'Courier Prime'; color: var(--gold); margin-bottom: 1rem; display: block; font-size: 14px; }
+        .sec-title { font-family: 'Cormorant Garamond'; font-weight: 700; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 1rem; }
+        
+        /* 3. About */
+        .about-grid { display: grid; grid-template-columns: 55% 45%; gap: 4rem; align-items: center; }
+        .about-text p { color: var(--text-muted); line-height: 1.9; margin-bottom: 1.5rem; }
+        .mission-list li { display: flex; gap: 1rem; margin-bottom: 1rem; color: var(--text-muted); }
+        .mission-list li::before { content: '▸'; color: var(--emerald); font-family: 'Courier Prime'; }
+        
+        .quote-card { background: var(--emerald); border-radius: 8px; padding: 4rem 3rem; color: var(--ivory); position: relative; }
+        .quote-mark { font-family: 'Cormorant Garamond'; font-size: 8rem; color: var(--emerald-light); line-height: 0.5; margin-bottom: 1rem; }
+        .quote-text { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 300; font-size: 1.6rem; margin-bottom: 3rem; line-height: 1.5; }
+        .quote-author { font-family: 'Courier Prime'; font-size: 10px; color: var(--gold); letter-spacing: 4px; }
+
+        .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+        .value-card { background: white; border-left: 3px solid var(--emerald); padding: 1.5rem; transition: all 0.3s; }
+        .value-card:hover { background: var(--emerald-pale); transform: translateY(-3px); }
+        .value-title { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 1.2rem; color: var(--charcoal); margin-bottom: 0.5rem; }
+        .value-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* 4. Programs */
+        .prog-header { text-align: center; display: flex; flex-direction: column; align-items: center; margin-bottom: 4rem; }
+        .prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        
+        .prog-card { background: var(--charcoal-light); border-radius: 6px; padding: 2.5rem; position: relative; overflow: hidden; transition: all 0.3s; border-top: 0px solid var(--emerald); cursor: none; }
+        .prog-card.featured { grid-column: 1 / -1; background: var(--emerald); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem; }
+        
+        .prog-card:hover { transform: scale(1.02); border-top-width: 3px; background: #454545; }
+        .prog-card.featured:hover { background: var(--emerald-deep); }
+
+        .prog-num { font-family: 'Courier Prime'; color: var(--gold); margin-bottom: 1.5rem; }
+        .prog-title { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 1.5rem; color: var(--ivory); margin-bottom: 1rem; }
+        .prog-card.featured .prog-title { font-family: 'Bebas Neue'; font-size: 4rem; letter-spacing: 2px; }
+        .prog-desc { color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 2rem; font-size: 0.95rem; }
+        .prog-card.featured .prog-desc { font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.5rem; color: var(--gold-pale); max-width: 600px; }
+        .prog-link { display: flex; align-items: center; gap: 10px; font-family: 'Courier Prime'; font-size: 12px; color: var(--gold); text-transform: uppercase; }
+        .prog-dot { width: 8px; height: 8px; background: var(--emerald); border-radius: 50%; }
+
+        /* 5. Academy */
+        .acad-grid { display: grid; grid-template-columns: 45% 55%; gap: 4rem; align-items: center; }
+        .acad-visual { background: var(--emerald); border-radius: 6px; padding: 4rem 3rem; position: relative; overflow: hidden; }
+        .acad-wm { font-family: 'Bebas Neue'; font-size: 8rem; opacity: 0.08; color: var(--ivory); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; pointer-events: none; }
+        .acad-visual-title { font-family: 'Bebas Neue'; font-size: 2.5rem; color: var(--ivory); letter-spacing: 4px; position: relative; z-index: 1; }
+        .acad-desc-it { font-family: 'Cormorant Garamond'; font-style: italic; color: var(--ivory); opacity: 0.9; margin-bottom: 3rem; position: relative; z-index: 1; font-size: 1.2rem; }
+        
+        .acad-stats { display: flex; flex-direction: column; gap: 1rem; position: relative; z-index: 1; }
+        .acad-stat-box { background: var(--charcoal-mid); padding: 1rem 1.5rem; border-radius: 4px; display: flex; align-items: center; justify-content: space-between; border-left: 2px solid var(--gold); }
+        .acad-s-label { font-family: 'Courier Prime'; font-size: 12px; color: var(--ivory); text-transform: uppercase; }
+        .acad-s-num { font-family: 'Bebas Neue'; font-size: 1.5rem; color: var(--gold); }
+
+        .feature-list { margin: 2rem 0; display: flex; flex-direction: column; gap: 1rem; }
+        .feature-item { display: flex; gap: 1.5rem; padding: 1rem; transition: background 0.3s; border-radius: 4px; align-items: flex-start; }
+        .feature-item:hover { background: var(--emerald-pale); }
+        .f-icon { width: 24px; height: 24px; background: var(--emerald); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 12px; flex-shrink: 0; margin-top: 4px; }
+        .f-text h4 { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 1.2rem; color: var(--charcoal); margin-bottom: 0.2rem; }
+        .f-text p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* 6. Objectives */
+        .obj-header { text-align: center; display: flex; flex-direction: column; align-items: center; margin-bottom: 4rem; }
+        .obj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .obj-card { background: var(--charcoal-mid); border-radius: 6px; padding: 2.5rem; border-top: 3px solid var(--gold); transition: all 0.3s; cursor: none; }
+        .obj-card:hover { background: var(--charcoal-light); transform: scale(1.02); }
+        .obj-title { font-family: 'Bebas Neue'; font-size: 1.8rem; color: var(--ivory); letter-spacing: 3px; margin-bottom: 1.5rem; }
+        .obj-list li { color: rgba(255,255,255,0.65); margin-bottom: 0.8rem; font-size: 0.95rem; display: flex; gap: 10px; }
+        .obj-list li::before { content: '—'; color: var(--gold); font-weight: bold; }
+
+        /* 7. Infrastructure */
+        .infra-timeline { position: relative; margin-top: 8rem; display: flex; justify-content: space-between; padding-top: 0; }
+        .infra-timeline::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--gold); z-index: 0; transform: translateY(-50%); }
+        .infra-node { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; align-items: center; height: 450px; justify-content: center; }
+        .i-num { width: 40px; height: 40px; background: var(--ivory); border: 2px solid var(--gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-family: 'Bebas Neue'; font-size: 1.2rem; color: var(--gold); z-index: 2; flex-shrink: 0; }
+        .i-card { background: white; border: 1px solid var(--ivory-warm); border-radius: 6px; padding: 1.5rem; width: 90%; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.02); position: relative; z-index: 1; }
+        .i-card h4 { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 1.1rem; color: var(--charcoal); margin-bottom: 0.5rem; }
+        .i-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+        
+        .infra-node:nth-child(odd) { flex-direction: column; }
+        .infra-node:nth-child(odd) .i-num { margin-bottom: 2rem; }
+        
+        .infra-node:nth-child(even) { flex-direction: column-reverse; }
+        .infra-node:nth-child(even) .i-num { margin-top: 2rem; }
+        
+        .infra-node::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 8px; height: 8px; background: var(--gold); border-radius: 50%; z-index: 3; }
+
+        /* 8. Support */
+        .supp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+        .supp-h { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 300; font-size: clamp(2rem, 5vw, 4rem); color: var(--ivory); line-height: 1.1; margin-bottom: 1rem; }
+        .supp-helps li { display: flex; gap: 1rem; color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 1.1rem; }
+        .supp-helps li::before { content: '▸'; color: var(--gold); }
+        
+        .supp-ways { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+        .supp-pill { border: 1px solid var(--emerald); color: var(--emerald); padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; transition: all 0.3s; cursor: none; }
+        .supp-pill:hover { background: var(--emerald); color: var(--ivory); }
+        .btn-donate-large { background: var(--gold); color: var(--charcoal); font-family: 'Bebas Neue'; font-size: 22px; width: 100%; padding: 20px; text-align: center; border-radius: 2px; transition: transform 0.3s; display: block; cursor: none; letter-spacing: 2px; }
+        .btn-donate-large:hover { transform: scale(1.02); }
+
+        /* 9. Why */
+        .why-list { margin-top: 3rem; }
+        .why-row { display: flex; align-items: center; border-bottom: 1px solid var(--ivory-warm); padding: 2rem 0; position: relative; transition: background 0.25s; }
+        .why-row:hover { background: var(--emerald-pale); }
+        .w-num { font-family: 'Bebas Neue'; font-size: 2.5rem; color: var(--emerald); min-width: 80px; transition: color 0.3s; }
+        .why-row:hover .w-num { color: var(--emerald-deep); }
+        .w-line { width: 1px; height: 40px; background: var(--gold); margin-right: 2rem; }
+        .w-text { flex: 1; display: flex; justify-content: space-between; align-items: center; }
+        .w-title { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 1.3rem; color: var(--charcoal); width: 30%; }
+        .w-desc { font-size: 0.95rem; color: var(--text-muted); width: 65%; }
+
+        /* 10. Goals */
+        .goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem 4rem; margin-top: 3rem; }
+        .goal-item { display: flex; gap: 1.5rem; transition: all 0.3s; padding: 1.5rem; border-radius: 6px; }
+        .goal-item:hover { background: rgba(255,255,255,0.05); }
+        .g-num { font-family: 'Bebas Neue'; font-size: 3rem; color: var(--gold); line-height: 1; transition: text-shadow 0.3s; }
+        .goal-item:hover .g-num { text-shadow: 0 0 20px var(--gold); }
+        .g-line { width: 2px; background: var(--emerald-light); }
+        .g-title { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 1.2rem; color: var(--ivory); margin-bottom: 0.5rem; }
+        .g-desc { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+
+        /* 11. Footer */
+        footer { background: #141414; color: var(--ivory); border-top: 3px solid var(--gold); padding: 80px 0 20px 0; }
+        .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .foot-tag { font-family: 'Cormorant Garamond'; font-style: italic; color: var(--gold); font-size: 1.2rem; margin: 1rem 0; }
+        .foot-sub { font-family: 'Courier Prime'; font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 2px; }
+        
+        .foot-title { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--ivory); }
+        .foot-links li { margin-bottom: 0.8rem; }
+        .foot-links a { font-size: 14px; color: rgba(255,255,255,0.6); transition: color 0.3s; }
+        .foot-links a:hover { color: var(--emerald); }
+        
+        .legal-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .l-badge { font-family: 'Courier Prime'; font-size: 10px; color: var(--gold); border: 1px solid var(--gold); padding: 4px 10px; border-radius: 50px; }
+        
+        .f-contact p { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        
+        .foot-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .f-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+        .f-endtag { font-family: 'Courier Prime'; font-size: 11px; color: rgba(201,146,42,0.5); letter-spacing: 2px; }
+
+        /* Responsive */
+        @media (max-width: 1280px) {
+            .container { padding: 0 4%; }
+            .prog-grid { grid-template-columns: repeat(2, 1fr); }
+            .prog-card.featured { grid-column: 1 / -1; }
+        }
+
+        @media (max-width: 1024px) {
+            html, body { cursor: auto; }
+            .cursor-dot, .cursor-ring { display: none; }
+            a, .btn, .supp-pill, .obj-card { cursor: pointer; }
+            
+            .hero-h1 .line1, .hero-h1 .line2, .hero-h1 .line3 { font-size: clamp(5rem, 12vw, 8rem); }
+            .vertical-label { display: none; }
+            .about-grid, .acad-grid, .supp-grid { gap: 2rem; }
+            .obj-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            .w-text { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .w-title, .w-desc { width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 80px 0; }
+            .nav-links, .nav-right .btn-donate { display: none; }
+            .hamburger { display: flex; }
+            
+            .about-grid, .acad-grid, .supp-grid, .goals-grid, .prog-grid, .obj-grid { grid-template-columns: 1fr; }
+            .foot-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            
+            .infra-timeline { flex-direction: column; padding-top: 0; margin-top: 4rem; }
+            .infra-timeline::before { left: 20px; top: 0; bottom: 0; height: auto; width: 1px; transform: none; }
+            .infra-node { height: auto; flex-direction: row !important; gap: 2rem; align-items: flex-start; margin-bottom: 2rem; justify-content: flex-start; }
+            .infra-node:nth-child(odd) .i-num { margin-bottom: 0; }
+            .infra-node:nth-child(even) .i-num { margin-top: 0; }
+            .infra-node::after, .infra-node:nth-child(even)::after { top: 20px; left: 20px; transform: translate(-50%, -50%); }
+            .infra-node:nth-child(even) .i-num { margin: 0; }
+            .i-card { width: calc(100% - 60px); text-align: left; }
+            
+            .quote-card { padding: 2rem; }
+            .acad-visual { padding: 2rem; }
+            
+            .why-row { padding: 1.5rem 0; }
+            .w-num { font-size: 1.5rem; min-width: 40px; }
+            .w-line { margin-right: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-h1 .line1, .hero-h1 .line2, .hero-h1 .line3 { font-size: clamp(4rem, 14vw, 6rem); }
+            .hero-stats { flex-direction: column; gap: 1rem; }
+            .stat-sep { display: none; }
+            .foot-grid { grid-template-columns: 1fr; }
+            .foot-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .btn-donate-large { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- 1. Navbar -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">
+            <img src="images/logo.jpg" alt="Veer Logo" style="height: 40px; border-radius: 4px;">
+            <div class="logo-text-inner">
+                <div class="v-top">VEER</div>
+                <div class="v-sub">SPORTS FOUNDATION</div>
+            </div>
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#programs" class="nav-link">Programs</a></li>
+            <li><a href="#academy" class="nav-link">Academy</a></li>
+            <li><a href="#objectives" class="nav-link">Objectives</a></li>
+            <li><a href="#infrastructure" class="nav-link">Infrastructure</a></li>
+            <li><a href="#gallery" class="nav-link">Gallery</a></li>
+            <li><a href="#support" class="nav-link">Support</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <a href="#support" class="btn-donate">DONATE</a>
+            <div class="hamburger">
+                <span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <a href="#" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#programs" class="nav-link">Programs</a>
+        <a href="#academy" class="nav-link">Academy</a>
+        <a href="#objectives" class="nav-link">Objectives</a>
+        <a href="#infrastructure" class="nav-link">Infrastructure</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#support" class="nav-link">Support</a>
+        <a href="#support" class="btn-donate" style="margin-top: 2rem;">DONATE NOW</a>
+    </div>
+
+    <!-- 2. Hero -->
+    <section id="hero" class="bg-charcoal tex-charcoal diagonal-slash" data-theme="dark">
+        <div class="grain-overlay"></div>
+        <div class="hero-bg-wrapper">
+            <div class="hero-bg-parallax tex-charcoal"></div>
+        </div>
+        
+        <div class="vertical-label" style="top: 150px; color: var(--gold); opacity: 0.5;">EST. 2024 &middot; INDIA</div>
+        
+        <div class="container hero-content">
+            <div class="hero-tag">[ SECTION 8 NON-PROFIT ORGANIZATION ]</div>
+            
+            <h1 class="hero-h1">
+                <span class="line"><span class="line-inner line1">VEER</span></span>
+                <span class="line"><span class="line-inner line2">SPORTS</span></span>
+                <span class="line"><span class="line-inner line3">FOUNDATION</span></span>
+            </h1>
+            
+            <div class="hero-sub reveal" style="transition-delay: 0.5s;">
+                Empowering Youth Through Sports, Education & Leadership
+            </div>
+            
+            <div class="gold-rule reveal" style="transition-delay: 0.6s;"></div>
+            
+            <p class="hero-desc reveal" style="transition-delay: 0.6s;">
+                We believe in the transformative power of sports to build character, instill discipline, and create future leaders. Join us in our mission to provide opportunities for youth across the nation.
+            </p>
+            
+            <div class="hero-btns reveal" style="transition-delay: 0.7s;">
+                <a href="#academy" class="btn btn-em">JOIN THE ACADEMY &rarr;</a>
+                <a href="#programs" class="btn btn-outline-gold">OUR PROGRAMS</a>
+            </div>
+            
+            <div class="hero-stats reveal" style="transition-delay: 0.9s;">
+                <div class="hero-stat">
+                    <div class="hero-stat-num">08</div>
+                    <div class="hero-stat-label">Section Org</div>
+                </div>
+                <div class="stat-sep">|</div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">NPO</div>
+                    <div class="hero-stat-label">Non-Profit</div>
+                </div>
+                <div class="stat-sep">|</div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">PAN</div>
+                    <div class="hero-stat-label">India Reach</div>
+                </div>
+                <div class="stat-sep">|</div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">100%</div>
+                    <div class="hero-stat-label">Youth Focused</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="marquee-wrapper">
+            <div class="marquee-container">
+                <div class="marquee-content">
+                    VEER SPORTS FOUNDATION &middot; EMPOWERING YOUTH &middot; SECTION 8 NON-PROFIT &middot; PLAY. LEARN. LEAD. &middot; BUILDING CHAMPIONS &middot; VEER SPORTS FOUNDATION &middot; EMPOWERING YOUTH &middot; SECTION 8 NON-PROFIT &middot; PLAY. LEARN. LEAD. &middot; BUILDING CHAMPIONS &middot; 
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. About -->
+    <section id="about" class="bg-ivory tex-ivory" data-theme="light">
+        <div class="vertical-label" style="color: var(--emerald);">ABOUT US</div>
+        <div class="faded-letter" style="top: 0; right: 5%;">A</div>
+        
+        <div class="container about-grid">
+            <div class="about-text reveal">
+                <span class="sec-tag">[ 01 ]</span>
+                <h2 class="sec-title">Who We Are</h2>
+                <div class="gold-rule"></div>
+                
+                <p>VEER Sports Foundation is a registered Section 8 non-profit organization in India dedicated to youth development through cricket, sports, education, fitness, and leadership.</p>
+                <p>We operate with the core belief that every young individual deserves the opportunity to discover their potential. By integrating sports with education and character building, we create a holistic environment for growth.</p>
+                
+                <ul class="mission-list">
+                    <li>Promoting physical and mental wellness.</li>
+                    <li>Identifying and nurturing grassroots talent.</li>
+                    <li>Providing access to quality coaching and infrastructure.</li>
+                    <li>Fostering leadership, teamwork, and community spirit.</li>
+                </ul>
+            </div>
+            
+            <div class="about-visual">
+                <div class="quote-card reveal">
+                    <div class="quote-mark">"</div>
+                    <div class="quote-text">Sports are not just games — they are powerful tools for discipline, leadership, confidence, teamwork, and nation-building.</div>
+                    <div class="gold-rule" style="width: 40px; margin-bottom: 10px;"></div>
+                    <div class="quote-author">VEER SPORTS FOUNDATION</div>
+                </div>
+                
+                <div class="values-grid">
+                    <div class="value-card reveal" style="transition-delay: 0.1s;">
+                        <h4 class="value-title">Excellence</h4>
+                        <p class="value-desc">Striving for the highest standards in sports and life.</p>
+                    </div>
+                    <div class="value-card reveal" style="transition-delay: 0.2s;">
+                        <h4 class="value-title">Teamwork</h4>
+                        <p class="value-desc">Fostering collaboration and mutual respect.</p>
+                    </div>
+                    <div class="value-card reveal" style="transition-delay: 0.3s;">
+                        <h4 class="value-title">Discipline</h4>
+                        <p class="value-desc">Building strong character through consistent effort.</p>
+                    </div>
+                    <div class="value-card reveal" style="transition-delay: 0.4s;">
+                        <h4 class="value-title">Leadership</h4>
+                        <p class="value-desc">Developing the next generation of community leaders.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Programs -->
+    <section id="programs" class="bg-charcoal tex-charcoal diagonal-slash" data-theme="dark">
+        <div class="faded-letter" style="top: 10%; left: 5%;">P</div>
+        
+        <div class="container">
+            <div class="prog-header reveal">
+                <span class="sec-tag">[ 02 ]</span>
+                <h2 class="sec-title" style="color: var(--ivory);">Our Programs</h2>
+                <div class="gold-rule"></div>
+                <p style="color: rgba(255,255,255,0.6); max-width: 600px;">Comprehensive pathways designed to nurture talent, promote wellness, and empower communities across India.</p>
+            </div>
+            
+            <div class="prog-grid">
+                
+                <div class="prog-card featured reveal">
+                    <div class="prog-num">[ 01 ]</div>
+                    <h3 class="prog-title">Cricket Coaching</h3>
+                    <p class="prog-desc">Professional training programs combining technical skill development, tactical awareness, and match practice under expert guidance.</p>
+                    <div class="prog-link"><div class="prog-dot"></div> LEARN MORE</div>
+                </div>
+                
+                <div class="prog-card reveal" style="transition-delay: 0.1s;">
+                    <div class="prog-num">[ 02 ]</div>
+                    <h3 class="prog-title">High-Performance Training</h3>
+                    <p class="prog-desc">Advanced conditioning and specialized skill clinics for elite youth athletes aiming for professional levels.</p>
+                    <div class="prog-link"><div class="prog-dot"></div> DISCOVER</div>
+                </div>
+                
+                <div class="prog-card reveal" style="transition-delay: 0.2s;">
+                    <div class="prog-num">[ 03 ]</div>
+                    <h3 class="prog-title">Fitness & Wellness</h3>
+                    <p class="prog-desc">Holistic physical development focusing on strength, agility, nutrition, and mental well-being.</p>
+                    <div class="prog-link"><div class="prog-dot"></div> DISCOVER</div>
+                </div>
+                
+                <div class="prog-card reveal" style="transition-delay: 0.3s;">
+                    <div class="prog-num">[ 04 ]</div>
+                    <h3 class="prog-title">Youth Leadership</h3>
+                    <p class="prog-desc">Workshops and mentorship programs building essential life skills, confidence, and leadership abilities.</p>
+                    <div class="prog-link"><div class="prog-dot"></div> DISCOVER</div>
+                </div>
+                
+                <div class="prog-card reveal" style="transition-delay: 0.4s;">
+                    <div class="prog-num">[ 05 ]</div>
+                    <h3 class="prog-title">Scholarship Support</h3>
+                    <p class="prog-desc">Financial assistance and resources for talented athletes from economically challenged backgrounds.</p>
+                    <div class="prog-link"><div class="prog-dot"></div> DISCOVER</div>
+                </div>
+                
+                <div class="prog-card reveal" style="transition-delay: 0.5s;">
+                    <div class="prog-num">[ 06 ]</div>
+                    <h3 class="prog-title">Rural Sports Initiative</h3>
+                    <p class="prog-desc">Taking sports infrastructure and organized training programs to underserved rural communities.</p>
+                    <div class="prog-link"><div class="prog-dot"></div> DISCOVER</div>
+                </div>
+                
+                <div class="prog-card reveal" style="transition-delay: 0.6s;">
+                    <div class="prog-num">[ 07 ]</div>
+                    <h3 class="prog-title">Sports Events</h3>
+                    <p class="prog-desc">Organizing competitive platforms to showcase talent, build experience, and foster sportsmanship.</p>
+                    <div class="prog-link"><div class="prog-dot"></div> DISCOVER</div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Academy -->
+    <section id="academy" class="bg-ivory-warm tex-ivory" data-theme="light">
+        <div class="faded-letter" style="top: 0; right: 10%;">C</div>
+        
+        <div class="container">
+            <div class="reveal" style="margin-bottom: 4rem;">
+                <span class="sec-tag">[ 03 ]</span>
+                <h2 class="sec-title">The Academy</h2>
+                <div class="gold-rule"></div>
+            </div>
+            
+            <div class="acad-grid">
+                
+                <div class="acad-visual reveal">
+                    <div class="acad-wm">VEER</div>
+                    <h3 class="acad-visual-title">CRICKET<br>ACADEMY</h3>
+                    <div class="gold-rule" style="background-color: var(--gold-light);"></div>
+                    <p class="acad-desc-it">Developing technically strong, mentally disciplined, and physically fit cricketers.</p>
+                    
+                    <div class="acad-stats">
+                        <div class="acad-stat-box">
+                            <span class="acad-s-label">Junior Batches</span>
+                            <span class="acad-s-num">U12-U16</span>
+                        </div>
+                        <div class="acad-stat-box">
+                            <span class="acad-s-label">Senior Batches</span>
+                            <span class="acad-s-num">U19-U23</span>
+                        </div>
+                        <div class="acad-stat-box">
+                            <span class="acad-s-label">Pro Coaching</span>
+                            <span class="acad-s-num">ELITE</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="acad-content reveal">
+                    <h3 class="font-cormorant" style="font-size: 2rem; color: var(--charcoal); margin-bottom: 1rem;">Flagship Initiative</h3>
+                    <p style="color: var(--text-muted); line-height: 1.8;">Our premier training facility offers world-class coaching to aspiring cricketers. We focus on developing the complete athlete—technically sound, physically robust, and mentally prepared for competition. With structured programs for different age groups and skill levels, we ensure personalized attention and progressive development.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item reveal" style="transition-delay: 0.1s;">
+                            <div class="f-icon">✓</div>
+                            <div class="f-text">
+                                <h4>BCCI Certified Coaches</h4>
+                                <p>Expert guidance from experienced professionals.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item reveal" style="transition-delay: 0.2s;">
+                            <div class="f-icon">✓</div>
+                            <div class="f-text">
+                                <h4>Advanced Facilities</h4>
+                                <p>Turf wickets, bowling machines, and video analysis.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item reveal" style="transition-delay: 0.3s;">
+                            <div class="f-icon">✓</div>
+                            <div class="f-text">
+                                <h4>Strength & Conditioning</h4>
+                                <p>Dedicated fitness regimes for cricket athleticism.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item reveal" style="transition-delay: 0.4s;">
+                            <div class="f-icon">✓</div>
+                            <div class="f-text">
+                                <h4>Mental Toughness</h4>
+                                <p>Sports psychology sessions for focus and resilience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="btn btn-em" style="margin-top: 1rem;">ENROLL IN ACADEMY &rarr;</a>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Objectives -->
+    <section id="objectives" class="bg-emerald tex-emerald diagonal-slash" data-theme="dark">
+        <div class="faded-letter" style="top: 10%; left: 5%;">O</div>
+        
+        <div class="container">
+            <div class="obj-header reveal">
+                <span class="sec-tag">[ 04 ]</span>
+                <h2 class="sec-title" style="color: var(--ivory);">Strategic Objectives</h2>
+                <div class="gold-rule"></div>
+                <p style="color: rgba(255,255,255,0.7); max-width: 600px;">A clear plan for comprehensive development through integrated sports and education models.</p>
+            </div>
+            
+            <div class="obj-grid">
+                
+                <div class="obj-card reveal">
+                    <h3 class="obj-title">SPORTS DEVELOPMENT</h3>
+                    <ul class="obj-list">
+                        <li>Identify grassroots talent</li>
+                        <li>Provide structured training</li>
+                        <li>Create competitive platforms</li>
+                    </ul>
+                </div>
+                
+                <div class="obj-card reveal" style="transition-delay: 0.1s;">
+                    <h3 class="obj-title">CRICKET ACADEMY</h3>
+                    <ul class="obj-list">
+                        <li>Establish premier facilities</li>
+                        <li>Offer professional coaching</li>
+                        <li>Develop professional players</li>
+                    </ul>
+                </div>
+                
+                <div class="obj-card reveal" style="transition-delay: 0.2s;">
+                    <h3 class="obj-title">INFRASTRUCTURE</h3>
+                    <ul class="obj-list">
+                        <li>Build multi-sport arenas</li>
+                        <li>Upgrade rural facilities</li>
+                        <li>Ensure accessible grounds</li>
+                    </ul>
+                </div>
+                
+                <div class="obj-card reveal" style="transition-delay: 0.3s;">
+                    <h3 class="obj-title">YOUTH EMPOWERMENT</h3>
+                    <ul class="obj-list">
+                        <li>Foster leadership skills</li>
+                        <li>Promote gender equality</li>
+                        <li>Build self-confidence</li>
+                    </ul>
+                </div>
+                
+                <div class="obj-card reveal" style="transition-delay: 0.4s;">
+                    <h3 class="obj-title">EDUCATION & SKILL</h3>
+                    <ul class="obj-list">
+                        <li>Academic support programs</li>
+                        <li>Vocational training</li>
+                        <li>Life skills workshops</li>
+                    </ul>
+                </div>
+                
+                <div class="obj-card reveal" style="transition-delay: 0.5s;">
+                    <h3 class="obj-title">COMMUNITY DEV</h3>
+                    <ul class="obj-list">
+                        <li>Health awareness camps</li>
+                        <li>Community sports events</li>
+                        <li>Social integration drives</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Infrastructure -->
+    <section id="infrastructure" class="bg-ivory tex-ivory" data-theme="light">
+        <div class="faded-letter" style="top: 0; right: 5%;">I</div>
+        
+        <div class="container">
+            <div class="reveal">
+                <span class="sec-tag">[ 05 ]</span>
+                <h2 class="sec-title">Infrastructure Plan</h2>
+                <div class="gold-rule"></div>
+                <p style="color: var(--text-muted); max-width: 600px;">Creating world-class, accessible sports facilities to nurture talent across all levels of society.</p>
+            </div>
+            
+            <div class="infra-timeline">
+                
+                <div class="infra-node reveal" style="transition-delay: 0.1s;">
+                    <div class="i-num">1</div>
+                    <div class="i-card">
+                        <h4>Turf Wickets</h4>
+                        <p>International standard practice and match pitches.</p>
+                    </div>
+                </div>
+                
+                <div class="infra-node reveal" style="transition-delay: 0.2s;">
+                    <div class="i-num">2</div>
+                    <div class="i-card">
+                        <h4>Indoor Nets</h4>
+                        <p>All-weather training facilities with bowling machines.</p>
+                    </div>
+                </div>
+                
+
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Support -->
+    <section id="support" class="bg-charcoal tex-charcoal diagonal-slash" data-theme="dark">
+        <div class="container supp-grid">
+            
+            <div class="supp-left reveal">
+                <span class="sec-tag">[ 06 ]</span>
+                <h2 class="supp-h">Support Our Mission</h2>
+                <div class="gold-rule"></div>
+                <p style="color: rgba(255,255,255,0.6); margin-bottom: 2rem; line-height: 1.8;">Play. Learn. Lead. Join the movement to build champions and stronger communities.</p>
+                
+                <p style="font-family: 'Courier Prime'; color: var(--gold); margin-bottom: 1rem; font-size: 14px;">YOUR CONTRIBUTION HELPS:</p>
+                <ul class="supp-helps">
+                    <li>Provide coaching for underprivileged youth</li>
+                    <li>Supply quality sports equipment</li>
+                    <li>Fund educational scholarships</li>
+                    <li>Build better infrastructure</li>
+                    <li>Organize rural talent scouting</li>
+                    <li>Support nutritional programs</li>
+                </ul>
+            </div>
+            
+            <div class="supp-right reveal" style="transition-delay: 0.2s; background: var(--charcoal-mid); padding: 4rem 3rem; border-radius: 6px; border-top: 3px solid var(--gold);">
+                <h3 class="font-cormorant" style="font-size: 2rem; color: var(--ivory); margin-bottom: 2rem;">Ways to Support</h3>
+                
+                <div class="supp-ways">
+                    <div class="supp-pill">Donations</div>
+                    <div class="supp-pill">Sponsorships</div>
+                    <div class="supp-pill">CSR Partnerships</div>
+                    <div class="supp-pill">Volunteer</div>
+                    <div class="supp-pill">Equipment Support</div>
+                    <div class="supp-pill">Event Collaborations</div>
+                </div>
+                
+                <a href="#" class="btn-donate-large" style="margin-top: 3rem;">DONATE NOW &rarr;</a>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="bg-emerald tex-emerald diagonal-slash" data-theme="dark">
+        <div class="faded-letter" style="top: 10%; right: 5%;">G</div>
+        <div class="container">
+            <div class="reveal">
+                <span class="sec-tag">[ GALLERY ]</span>
+                <h2 class="sec-title" style="color: var(--ivory);">Our Gallery</h2>
+                <div class="gold-rule"></div>
+                <p style="color: rgba(255,255,255,0.7); max-width: 600px;">Glimpses of our champions in action and the facilities that build them.</p>
+            </div>
+            
+            <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem;">
+                <div class="reveal"><img src="images/10.jpg" alt="Gallery Image" style="width: 100%; height: 300px; object-fit: cover; border-radius: 6px; border-bottom: 3px solid var(--gold);"></div>
+                <div class="reveal" style="transition-delay: 0.1s;"><img src="images/6.jpg" alt="Gallery Image" style="width: 100%; height: 300px; object-fit: cover; border-radius: 6px; border-bottom: 3px solid var(--gold);"></div>
+                <div class="reveal" style="transition-delay: 0.2s;"><img src="images/9.jpg" alt="Gallery Image" style="width: 100%; height: 300px; object-fit: cover; border-radius: 6px; border-bottom: 3px solid var(--gold);"></div>
+                <div class="reveal" style="transition-delay: 0.3s;"><img src="images/5.jpg" alt="Gallery Image" style="width: 100%; height: 300px; object-fit: cover; border-radius: 6px; border-bottom: 3px solid var(--gold);"></div>
+                <div class="reveal" style="transition-delay: 0.4s;"><img src="images/3.jpeg" alt="Gallery Image" style="width: 100%; height: 300px; object-fit: cover; border-radius: 6px; border-bottom: 3px solid var(--gold);"></div>
+                <div class="reveal" style="transition-delay: 0.5s;"><img src="images/4.jpeg" alt="Gallery Image" style="width: 100%; height: 300px; object-fit: cover; border-radius: 6px; border-bottom: 3px solid var(--gold);"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Why Choose Us -->
+    <section id="why" class="bg-ivory-warm tex-ivory" data-theme="light">
+        <div class="container">
+            <div class="reveal">
+                <span class="sec-tag">[ 07 ]</span>
+                <h2 class="sec-title">Why Choose Us</h2>
+                <div class="gold-rule"></div>
+            </div>
+            
+            <div class="why-list">
+                
+                <div class="why-row reveal">
+                    <div class="w-num">01</div>
+                    <div class="w-line"></div>
+                    <div class="w-text">
+                        <div class="w-title">Expert Coaching</div>
+                        <div class="w-desc">Learn from certified professionals with rich playing experience.</div>
+                    </div>
+                </div>
+                
+                <div class="why-row reveal">
+                    <div class="w-num">02</div>
+                    <div class="w-line"></div>
+                    <div class="w-text">
+                        <div class="w-title">Holistic Approach</div>
+                        <div class="w-desc">Focusing equally on sports, education, and character development.</div>
+                    </div>
+                </div>
+                
+                <div class="why-row reveal">
+                    <div class="w-num">03</div>
+                    <div class="w-line"></div>
+                    <div class="w-text">
+                        <div class="w-title">Top Facilities</div>
+                        <div class="w-desc">Access to premium training infrastructure and modern equipment.</div>
+                    </div>
+                </div>
+                
+                <div class="why-row reveal">
+                    <div class="w-num">04</div>
+                    <div class="w-line"></div>
+                    <div class="w-text">
+                        <div class="w-title">Clear Pathways</div>
+                        <div class="w-desc">Structured progression from grassroots to professional levels.</div>
+                    </div>
+                </div>
+                
+                <div class="why-row reveal">
+                    <div class="w-num">05</div>
+                    <div class="w-line"></div>
+                    <div class="w-text">
+                        <div class="w-title">Inclusivity</div>
+                        <div class="w-desc">Programs designed to support talent regardless of background.</div>
+                    </div>
+                </div>
+                
+                <div class="why-row reveal">
+                    <div class="w-num">06</div>
+                    <div class="w-line"></div>
+                    <div class="w-text">
+                        <div class="w-title">Mentorship</div>
+                        <div class="w-desc">Continuous guidance for sports and life decisions.</div>
+                    </div>
+                </div>
+                
+                <div class="why-row reveal">
+                    <div class="w-num">07</div>
+                    <div class="w-line"></div>
+                    <div class="w-text">
+                        <div class="w-title">Community Focus</div>
+                        <div class="w-desc">Building local sports culture and engaging families.</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Goals -->
+    <section id="goals" class="bg-emerald-deep tex-emerald diagonal-slash" data-theme="dark">
+        <div class="container">
+            <div class="reveal">
+                <span class="sec-tag">[ 08 ]</span>
+                <h2 class="sec-title" style="color: var(--ivory);">Our Future Goals</h2>
+                <div class="gold-rule"></div>
+            </div>
+            
+            <div class="goals-grid">
+                
+                <div class="goal-item reveal">
+                    <div class="g-num">01</div>
+                    <div class="g-line"></div>
+                    <div>
+                        <h4 class="g-title">Pan-India Network</h4>
+                        <p class="g-desc">Establish a pan-India network of high-performance academies.</p>
+                    </div>
+                </div>
+                
+                <div class="goal-item reveal">
+                    <div class="g-num">02</div>
+                    <div class="g-line"></div>
+                    <div>
+                        <h4 class="g-title">State Scholarships</h4>
+                        <p class="g-desc">Launch state-level scholarship programs for 1000+ athletes.</p>
+                    </div>
+                </div>
+                
+                <div class="goal-item reveal">
+                    <div class="g-num">03</div>
+                    <div class="g-line"></div>
+                    <div>
+                        <h4 class="g-title">Rural Hubs</h4>
+                        <p class="g-desc">Develop self-sustaining rural sports hubs in 50 districts.</p>
+                    </div>
+                </div>
+                
+                <div class="goal-item reveal">
+                    <div class="g-num">04</div>
+                    <div class="g-line"></div>
+                    <div>
+                        <h4 class="g-title">Global Exchange</h4>
+                        <p class="g-desc">Partner with international sports bodies for exchange programs.</p>
+                    </div>
+                </div>
+                
+                <div class="goal-item reveal">
+                    <div class="g-num">05</div>
+                    <div class="g-line"></div>
+                    <div>
+                        <h4 class="g-title">Women in Sports</h4>
+                        <p class="g-desc">Create a dedicated women's sports development initiative.</p>
+                    </div>
+                </div>
+                
+                <div class="goal-item reveal">
+                    <div class="g-num">06</div>
+                    <div class="g-line"></div>
+                    <div>
+                        <h4 class="g-title">Sports Science</h4>
+                        <p class="g-desc">Integrate sports science and tech in all grassroots training.</p>
+                    </div>
+                </div>
+                
+                <div class="goal-item reveal">
+                    <div class="g-num">07</div>
+                    <div class="g-line"></div>
+                    <div>
+                        <h4 class="g-title">National Tournaments</h4>
+                        <p class="g-desc">Host national level youth tournaments across multiple sports.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Footer -->
+    <footer>
+        <div class="container">
+            <div class="foot-grid">
+                
+                <div>
+                    <div class="nav-logo">
+                        <img src="images/logo.jpg" alt="Veer Logo" style="height: 40px; border-radius: 4px;">
+                        <div class="logo-text-inner">
+                            <div class="v-top" style="color: var(--ivory);">VEER</div>
+                            <div class="v-sub">SPORTS FOUNDATION</div>
+                        </div>
+                    </div>
+                    <p class="foot-tag">Building Champions, Leaders & Stronger Communities.</p>
+                    <p class="foot-sub">MORE THAN SPORTS &middot; BUILDING CHARACTER</p>
+                </div>
+                
+                <div>
+                    <h4 class="foot-title">Navigation</h4>
+                    <ul class="foot-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#academy">Cricket Academy</a></li>
+                        <li><a href="#support">Donate</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="foot-title">Legal</h4>
+                    <div class="legal-badges">
+                        <span class="l-badge">Section 8</span>
+                        <span class="l-badge">Non-Profit</span>
+                        <span class="l-badge">Pan-India</span>
+                        <span class="l-badge">Ltd Liability</span>
+                    </div>
+                </div>
+                
+                <div class="f-contact">
+                    <h4 class="foot-title">Reach Us</h4>
+                    <p>contact@veerfoundation.org</p>
+                    <p>India</p>
+                </div>
+                
+            </div>
+            
+            <div class="foot-bottom">
+                <div class="f-copy">&copy; 2024 Veer Sports Foundation. All Rights Reserved.</div>
+                <div class="f-endtag">PLAY. LEARN. LEAD.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Custom Cursor Logic
+            const dot = document.querySelector('.cursor-dot');
+            const ring = document.querySelector('.cursor-ring');
+            
+            if (window.innerWidth > 1024) {
+                let mouseX = window.innerWidth / 2;
+                let mouseY = window.innerHeight / 2;
+                let ringX = mouseX;
+                let ringY = mouseY;
+                let isMouseDown = false;
+
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    dot.style.left = `${mouseX}px`;
+                    dot.style.top = `${mouseY}px`;
+                });
+
+                window.addEventListener('mousedown', () => { 
+                    isMouseDown = true; 
+                    dot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+                    ring.style.transform = 'translate(-50%, -50%) scale(0.5)';
+                });
+                
+                window.addEventListener('mouseup', () => { 
+                    isMouseDown = false; 
+                    dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                    ring.style.transform = 'translate(-50%, -50%) scale(1)';
+                });
+
+                function loop() {
+                    ringX += (mouseX - ringX) * 0.12;
+                    ringY += (mouseY - ringY) * 0.12;
+                    ring.style.left = `${ringX}px`;
+                    ring.style.top = `${ringY}px`;
+                    requestAnimationFrame(loop);
+                }
+                loop();
+                
+                // Hover effects on links to expand dot
+                const interactables = document.querySelectorAll('a, .btn, .supp-pill, .hamburger, .obj-card, .prog-card');
+                interactables.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                        dot.style.backgroundColor = 'var(--gold)';
+                        ring.style.opacity = '0';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                        dot.style.backgroundColor = 'var(--emerald)';
+                        ring.style.opacity = '1';
+                    });
+                });
+            }
+
+            // Intersection Observer for Reveal Animations
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+            revealElements.forEach(el => observer.observe(el));
+
+            // Parallax Hero
+            const heroBg = document.querySelector('.hero-bg-parallax');
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if(heroBg && scrollY < window.innerHeight) {
+                    heroBg.style.transform = `translateY(${scrollY * 0.25}px)`;
+                }
+            }, { passive: true });
+
+            // Sticky Navbar & Theme switching
+            const navbar = document.getElementById('navbar');
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-links .nav-link');
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                
+                // Navbar style
+                if (scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                    navbar.classList.remove('nav-dark');
+                }
+
+                // Scroll Spy & Theme detection
+                let current = '';
+                let currentTheme = 'dark'; // Hero is dark
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                        currentTheme = section.getAttribute('data-theme');
+                    }
+                });
+
+                if(navbar.classList.contains('scrolled')) {
+                    if(currentTheme === 'dark') {
+                        navbar.classList.add('nav-dark');
+                    } else {
+                        navbar.classList.remove('nav-dark');
+                    }
+                }
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${current}` || (current === 'hero' && item.getAttribute('href') === '#')) {
+                        item.classList.add('active');
+                    }
+                });
+            }, { passive: true });
+
+            // Mobile Menu
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-menu .nav-link, .mobile-menu .btn-donate');
+
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                if(mobileMenu.classList.contains('active')) {
+                    mobileLinks.forEach((link, idx) => {
+                        link.style.transitionDelay = `${0.1 + (idx * 0.05)}s`;
+                    });
+                } else {
+                    mobileLinks.forEach(link => {
+                        link.style.transitionDelay = '0s';
+                    });
+                }
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
