@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate | Veer Sports Foundation</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="images/logo.jpg" alt="Veer Logo" style="height: 36px; border-radius: 4px;">
+            <div class="logo-text-inner">
+                <div class="v-top">VEER</div>
+                <div class="v-sub">SPORTS FOUNDATION</div>
+            </div>
+        </a>
+        <a href="index.html" class="btn-back">RETURN HOME</a>
+    </nav>
+
+    <div class="donate-container">
+        <div class="donate-card">
+            <div class="donate-header">
+                <h1 class="donate-title">MAKE A DONATION</h1>
+                <p class="donate-sub">Your support empowers youth through sports.</p>
+            </div>
+
+            <form id="donateForm">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="name" class="form-input" required placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-input" required placeholder="Enter your email address">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" id="phone" class="form-input" required placeholder="Enter your 10-digit phone number">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Donation Amount (INR)</label>
+                    <div class="amount-preset-grid">
+                        <div class="amount-preset" data-amount="500">₹500</div>
+                        <div class="amount-preset active" data-amount="1000">₹1,000</div>
+                        <div class="amount-preset" data-amount="5000">₹5,000</div>
+                    </div>
+                    <input type="number" id="amount" class="form-input" required min="1" value="1000" placeholder="Custom Amount">
+                </div>
+
+                <div id="errorMsg" class="error-msg"></div>
+
+                <button type="submit" id="submitBtn" class="btn-submit">
+                    <span id="btnText">PROCEED TO SECURE PAYMENT</span>
+                    <div id="btnLoader" class="loader"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Preset amount logic
+        const presetBtns = document.querySelectorAll('.amount-preset');
+        const amountInput = document.getElementById('amount');
+
+        presetBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                presetBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                amountInput.value = btn.getAttribute('data-amount');
+            });
+        });
+
+        amountInput.addEventListener('input', () => {
+            presetBtns.forEach(b => b.classList.remove('active'));
+        });
+
+        // Form submission logic
+        document.getElementById('donateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const amount = parseInt(document.getElementById('amount').value);
+
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoader = document.getElementById('btnLoader');
+            const errorMsg = document.getElementById('errorMsg');
+
+            // Reset UI
+            errorMsg.style.display = 'none';
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'block';
+            submitBtn.disabled = true;
+
+            try {
+                // 1. Create Order via Vercel Function
+                // In a real Vercel app, /api/create-order would be accessible relative to the root
+                // Since this might run locally or statically, we ensure it calls the relative API path
+                const response = await fetch('/api/create-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to create order');
+                }
+
+                const orderData = await response.json();
+
+                // 1.5 Fetch Key
+                const keyRes = await fetch('/api/get-key');
+                const keyData = await keyRes.json();
+
+                // 2. Configure Razorpay Options
+                const options = {
+                    key: keyData.key,
+                    amount: orderData.amount,
+                    currency: orderData.currency,
+                    name: "Veer Sports Foundation",
+                    description: "Donation for Youth Empowerment",
+                    image: "images/logo.jpg",
+                    order_id: orderData.id,
+                    handler: async function (paymentResponse) {
+                        // 3. Verify Payment
+                        try {
+                            const verifyRes = await fetch('/api/verify-payment', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    razorpay_order_id: paymentResponse.razorpay_order_id,
+                                    razorpay_payment_id: paymentResponse.razorpay_payment_id,
+                                    razorpay_signature: paymentResponse.razorpay_signature,
+                                    donorDetails: { name, email, phone, amount }
+                                })
+                            });
+                            
+                            const verifyData = await verifyRes.json();
+                            
+                            if (verifyData.success) {
+                                window.location.href = "thank-you.html";
+                            } else {
+                                console.error("Signature Verification Failed:", verifyData.message);
+                                window.location.href = "payment-failed.html?reason=signature_failed";
+                            }
+                        } catch (err) {
+                            console.error(err);
+                            window.location.href = "payment-failed.html";
+                        }
+                    },
+                    prefill: {
+                        name: name,
+                        email: email,
+                        contact: phone
+                    },
+                    theme: {
+                        color: "#1A5C3A"
+                    },
+                    modal: {
+                        ondismiss: function() {
+                            // User closed the modal without payment
+                            btnText.style.display = 'inline-block';
+                            btnLoader.style.display = 'none';
+                            submitBtn.disabled = false;
+                        }
+                    }
+                };
+
+                // Open Razorpay Checkout
+                const rzp = new Razorpay(options);
+                rzp.on('payment.failed', function (response){
+                    console.error("Payment Failed at Gateway:", response.error.description);
+                    window.location.href = "payment-failed.html?reason=gateway_declined";
+                });
+                rzp.open();
+
+            } catch (err) {
+                console.error(err);
+                errorMsg.textContent = "Something went wrong. Please try again later or check API configuration.";
+                errorMsg.style.display = 'block';
+                
+                btnText.style.display = 'inline-block';
+                btnLoader.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
